@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: buildinginsurance-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Str0ngPassw0rd!2026"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Str0ngPassw0rd!2026' -Q 'SELECT 1' -C || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: BuildingInsurance.API/Dockerfile
+    container_name: buildinginsurance-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__BuildingInsuranceDb: "Server=db,1433;Database=BuildingInsurance;User Id=sa;Password=Str0ngPassw0rd!2026;TrustServerCertificate=True;"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  policy-expiration-worker:
+    build:
+      context: .
+      dockerfile: BuildingInsurance.PolicyExpiration.Worker/Dockerfile
+    container_name: buildinginsurance-policy-expiration-worker
+    environment:
+      ConnectionStrings__BuildingInsuranceDb: "Server=db,1433;Database=BuildingInsurance;User Id=sa;Password=Str0ngPassw0rd!2026;TrustServerCertificate=True;"
+    depends_on:
+      db:
+        condition: service_healthy

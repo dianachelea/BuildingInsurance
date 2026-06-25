@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/" />
+  <Project Path="BuildingInsurance.API/BuildingInsurance.API.csproj" Id="738e6d36-06c3-4a76-9827-37bf31bd32ce" />
+  <Project Path="BuildingInsurance.Application/BuildingInsurance.Application.csproj" Id="a84c859f-f937-41c3-96af-e75d7805f49c" />
+  <Project Path="BuildingInsurance.Domain/BuildingInsurance.Domain.csproj" Id="2d4d1467-9b0b-4a69-aafa-89a5ee57dc28" />
+  <Project Path="BuildingInsurance.Infrastructure/BuildingInsurance.Infrastructure.csproj" Id="40cca78b-4a04-4119-ac5e-b100397bb82d" />
+  <Project Path="BuildingInsurance.IntegrationTests/BuildingInsurance.IntegrationTests.csproj" Id="11e34703-834b-4cd7-a064-6b5189d9d703" />
+  <Project Path="BuildingInsurance.PolicyExpiration.Worker/BuildingInsurance.Policy.Worker.csproj" />
+  <Project Path="BuildingInsurance.Tests/BuildingInsurance.Tests.csproj" Id="69e159c6-381c-45f3-8f60-797654d14ad7" />
+</Solution>
